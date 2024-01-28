@@ -3,7 +3,7 @@ import React from 'react';
 const Navigation = () => {
     return (
         <nav style={{display: 'flex', justifyContent: 'flex-end' }}>
-            <p className='f3 link dim white underline pa3 pointer'>
+            <p className='f5 link dim white ba br1 pa2 pointer mr3'>
                 Sign out
             </p>
         </nav>
