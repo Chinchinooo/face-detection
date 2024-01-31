@@ -6,6 +6,10 @@ body {
   background: rgb(33, 32, 32);
 }
 
+button {
+  cursor: pointer;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
