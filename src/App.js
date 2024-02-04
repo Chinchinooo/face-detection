@@ -3,9 +3,12 @@ import Navigation from './component/Navigation/Navigation';
 import Logo from './component/Logo/Logo';
 import ImageLinkForm from './component/ImageLinkForm/ImageLinkForm';
 import Rank from './component/Rank/Rank';
+import FaceRecognition from './component/FaceRecognition/FaceRecognition';
 import ParticlesBg from 'particles-bg'
 import './App.css';
 import { click } from '@testing-library/user-event/dist/click';
+
+
 
 class App extends Component {
   constructor() {
