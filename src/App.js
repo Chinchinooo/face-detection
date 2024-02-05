@@ -46,6 +46,7 @@ class App extends Component {
     this.state = {
       input: '',
       imageUrl: ''
+      
     }
   }
 
@@ -56,12 +57,33 @@ class App extends Component {
   onSubmit = () => {
     this.setState({imageUrl: this.state.input})
 
-    fetch("https://api.clarifai.com/v2/models/" + 'ethnicity-demographics-recognition' + "/outputs", setUpApi(this.state.input))
+    fetch("https://api.clarifai.com/v2/models/" + 'face-detection' + "/outputs", setUpApi(this.state.input))
     .then(response => response.json())
-    .then(result => console.log(result))
+    .then(result => {
+
+        const regions = result.outputs[0].data.regions;
+
+        regions.forEach(region => {
+            // Accessing and rounding the bounding box values
+            const boundingBox = region.region_info.bounding_box;
+            const topRow = boundingBox.top_row.toFixed(3);
+            const leftCol = boundingBox.left_col.toFixed(3);
+            const bottomRow = boundingBox.bottom_row.toFixed(3);
+            const rightCol = boundingBox.right_col.toFixed(3);
+
+            region.data.concepts.forEach(concept => {
+                // Accessing and rounding the concept value
+                const name = concept.name;
+                const value = concept.value.toFixed(4);
+
+                console.log(`${name}: ${value} BBox: ${topRow}, ${leftCol}, ${bottomRow}, ${rightCol}`);
+                
+            });
+        });
+
+    })
     .catch(error => console.log('error', error));
-  } 
-  
+  }
   
   render () {
     return (
