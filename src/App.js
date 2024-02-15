@@ -5,6 +5,7 @@ import Logo from './component/Logo/Logo';
 import ImageLinkForm from './component/ImageLinkForm/ImageLinkForm';
 import Rank from './component/Rank/Rank';
 import FaceRecognition from './component/FaceRecognition/FaceRecognition';
+import Register from './component/Register/Register';
 import ParticlesBg from 'particles-bg'
 import './App.css';
 
@@ -87,18 +88,23 @@ class App extends Component {
   }
   
   render () {
+   const { imageUrl, route, box } = this.state;
     return (
       <div className="App">
         <ParticlesBg color="#ff0000" num={80} type="cobweb" bg={true} />
-        <Navigation onRouteChange={this.onRouteChange} />
-        { this.state.route === 'signin'
-          ? <SignIn onRouteChange={this.onRouteChange}/>
-          : <div>
-              <Logo />
+        <Logo />
+        { route === 'home'
+          ? <div>
+              <Navigation onRouteChange={this.onRouteChange} />
               <Rank />
               <ImageLinkForm onInputChange={this.onInputChange} onSubmit={this.onSubmit}/>
-              <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl} />
+              <FaceRecognition box={box} imageUrl={imageUrl} />
             </div>
+          : (
+            route === 'signin'
+            ? <SignIn onRouteChange={this.onRouteChange}/>
+            : <Register onRouteChange={this.onRouteChange}/>
+          )
         }
         </div>
     )

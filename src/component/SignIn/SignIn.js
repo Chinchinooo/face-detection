@@ -2,7 +2,8 @@ import React from 'react';
 
 const SignIn = ({onRouteChange}) => {
   return (
-    <article class="br2 ba dark-gray b--white-50 mv4 w-100 w-50-m w-25-l mw5 center">
+    <div className="flex justify-center items-center vh-100">
+    <article class="br2 ba dark-gray b--white-50 mv4 mw5">
         <main className="pa4 black-80">
             <form className="measure">
                 <fieldset id="sign_up" className="ba b--transparent ph0 mh0 white">
@@ -20,11 +21,12 @@ const SignIn = ({onRouteChange}) => {
                 <input onClick={() => onRouteChange('home')} className="b ph3 pv2 input-reset ba b--white bg-transparent dim pointer f6 dib white" type="submit" value="Sign in"/>
                 </div>
                 <div className="lh-copy mt3">
-                    <a href="#0" class="f6 link dim white db">Register</a>
+                    <p onClick={() => onRouteChange('register')} class="f6 link pointer dim white db">Register</p>
                 </div>
             </form>
         </main>
     </article>
+    </div>
   );
 }
 
