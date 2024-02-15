@@ -52,7 +52,7 @@ class App extends Component {
     }
   }
 
-  calculateFaceLocation = (data) => {
+  calculateFaceLocation = (data) =>  {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputimage');
     const width = Number(image.width);
@@ -66,7 +66,6 @@ class App extends Component {
   }
 
   displayFaceBox = (box) => {
-    console.log(box);
     this.setState({box: box});
   }
 
@@ -83,13 +82,17 @@ class App extends Component {
     .catch(error => console.log('error', error));
   }
 
+  onRouteChange = (route) => {
+    this.setState({route: route})
+  }
+  
   render () {
     return (
       <div className="App">
         <ParticlesBg color="#ff0000" num={80} type="cobweb" bg={true} />
-        <Navigation />
+        <Navigation onRouteChange={this.onRouteChange} />
         { this.state.route === 'signin'
-          ? <SignIn/>
+          ? <SignIn onRouteChange={this.onRouteChange}/>
           : <div>
               <Logo />
               <Rank />
