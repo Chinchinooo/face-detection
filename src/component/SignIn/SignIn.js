@@ -1,11 +1,12 @@
 import React from 'react';
+import './SignIn.css';
 
 const SignIn = ({onRouteChange}) => {
   return (
     <div className="flex justify-center items-center vh-100">
-        <article className="br2 ba dark-gray b--white-50 mv4 mw5">
+        <article className="br2 ba dark-gray b--white-50 centerSignIn mw5">
             <main className="pa4 black-80">
-                <form className="measure">
+                <div className="measure">
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0 white">
                     <legend className="f3 fw6 ph0 mh0">Sign In</legend>
                     <div className="mt3">
@@ -23,7 +24,7 @@ const SignIn = ({onRouteChange}) => {
                     <div className="lh-copy mt3">
                         <p onClick={() => onRouteChange('register')} className="f6 link pointer dim white db">Register</p>
                     </div>
-                </form>
+                </div>
             </main>
         </article>
     </div>
