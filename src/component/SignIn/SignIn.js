@@ -2,6 +2,22 @@ import React from 'react';
 import './SignIn.css';
 
 class Signin extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            signInEmail: '',
+            signInPass: ''
+        }
+    }
+
+    onEmailChange = (event) => {
+        this.setState({signInEmail: event.target.value})
+    }
+
+    onPassChange = (event) => {
+        this.setState({signInPass: event.target.value})
+    }
+
     render() {
         const {onRouteChange} = this.props;
         return (
