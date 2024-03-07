@@ -22,7 +22,7 @@ class Register extends React.Component {
         this.setState({name: event.target.value})
     }
 
-    onSubmitRegister = () => {
+    onSubmitSignIn = () => {
         fetch('http://localhost:3000/register', {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
@@ -46,7 +46,7 @@ class Register extends React.Component {
             <div className="flex justify-center items-center vh-100">
                 <article className="br2 ba dark-gray b--white-50 mv4 w-100 w-50-m w-25-l mw5">
                     <main className="pa4 black-80">
-                        <form className="measure">
+                        <div className="measure">
                             <fieldset id="sign_up" className="ba b--transparent ph0 mh0 white">
                             <legend className="f3 fw6 ph0 mh0">Register</legend>
                             <div className="mt3">
@@ -63,7 +63,7 @@ class Register extends React.Component {
                                 <input 
                                 className="pa2 white input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                                 type="email"
-                                name="email-address"  
+                                name="email-address" 
                                 id="email-address"
                                 onChange={this.onEmailChange}/>
                             </div>
@@ -78,9 +78,9 @@ class Register extends React.Component {
                             </div>
                             </fieldset>
                             <div className="">
-                            <input onClick={this.onSubmitRegister} className="b ph3 pv2 input-reset ba b--white bg-transparent dim pointer f6 dib white" type="submit" value="Register"/>
+                            <input onClick={this.onSubmitSignIn} className="b ph3 pv2 input-reset ba b--white bg-transparent dim pointer f6 dib white" type="submit" value="Register"/>
                             </div>
-                        </form>
+                        </div>
                     </main>
                 </article>
             </div>
