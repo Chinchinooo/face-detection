@@ -61,12 +61,6 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    fetch('http://localhost:3000/')
-      .then(response => response.json())
-      .then(console.log);
-  }
-
   loadUser = (data) => {
       this.setState({user: {
         id: data.id,
@@ -99,7 +93,7 @@ class App extends Component {
   }
 
   onSubmit = () => {
-    this.setState({imageUrl: this.state.input})
+    this.setState({imageUrl: this.state.input});
 
     fetch("https://api.clarifai.com/v2/models/" + 'face-detection' + "/outputs", setUpApi(this.state.input))
     .then(response => response.json())
@@ -117,7 +111,7 @@ class App extends Component {
     }
     this.setState({route: route})
   }
-  
+
   render () {
    const { imageUrl, route, box, isSignedIn } = this.state;
     return (
@@ -133,7 +127,7 @@ class App extends Component {
             </div>
           : (
             route === 'signin'
-            ? <SignIn onRouteChange={this.onRouteChange}/>
+            ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
             : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
           )
         }

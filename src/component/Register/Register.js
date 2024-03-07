@@ -24,25 +24,23 @@ class Register extends React.Component {
 
     onSubmitRegister = () => {
         fetch('http://localhost:3000/register', {
-            method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.password,
-                name: this.state.name
-            })
+          method: 'post',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            email: this.state.email,
+            password: this.state.password,
+            name: this.state.name
+          })
         })
-            .then(response => response.json())
-            .then(user => {
-                if (user) {
-                    this.props.loadUser(user);
-                    this.props.onRouteChange('home', () => {
-                        console.log("Redirected to home page");
-                    });
-                } 
-            });
-    }
-
+          .then(response => response.json())
+          .then(user => {
+            if (user) {
+              this.props.loadUser(user)
+              this.props.onRouteChange('home');
+            }
+          })
+      }
+      
     render() {
         return (
             <div className="flex justify-center items-center vh-100">
@@ -61,7 +59,7 @@ class Register extends React.Component {
                                 onChange={this.onNameChange}/>
                             </div>
                             <div className="mt3">
-                                <label className="db fw6 lh-copy f6" htmlFor="email-address">Email address</label>
+                                <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                                 <input 
                                 className="pa2 white input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                                 type="email"
