@@ -92,15 +92,31 @@ class App extends Component {
     this.setState({input: event.target.value})
   }
 
-  onSubmit = () => {
-    this.setState({imageUrl: this.state.input});
-
-    fetch("https://api.clarifai.com/v2/models/" + 'face-detection' + "/outputs", setUpApi(this.state.input))
-    .then(response => response.json())
-    .then(result => this.displayFaceBox(this.calculateFaceLocation(result)))
-    .catch(error => console.log('error', error));
+    onSubmit = () => {
+      this.setState({imageUrl: this.state.input});
+  
+      fetch("https://api.clarifai.com/v2/models/" + 'face-detection' + "/outputs", setUpApi(this.state.input))
+        .then(response => {
+          if (response) {
+            fetch('http://localhost:3000/image', {
+              method: 'put',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({
+                id: this.state.user.id
+              })
+            })
+            .then(response => response.json())
+            .then(count => {
+              this.setState(Object.assign(this.state.user, { entries: count}));
+              // Moved the following line inside the 'then' block to ensure it executes after the previous asynchronous operations
+              this.displayFaceBox(this.calculateFaceLocation(response));
+            })
+            .catch(error => console.log('error', error));
+          }
+        })
+        .catch(error => console.log('error', error));
   }
-
+  
   onRouteChange = (route) => {
     if (route === 'signout') {
       this.setState({isSignedIn: false})
