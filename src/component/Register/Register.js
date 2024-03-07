@@ -22,8 +22,8 @@ class Register extends React.Component {
         this.setState({name: event.target.value})
     }
 
-    onSubmitSignIn = () => {
-        fetch('http://localhost:3000/signin', {
+    onSubmitRegister = () => {
+        fetch('http://localhost:3000/register', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -36,14 +36,14 @@ class Register extends React.Component {
             .then(user => {
                 if (user) {
                     this.props.loadUser(user);
-                    this.props.onRouteChange('home');
-                }
+                    this.props.onRouteChange('home', () => {
+                        console.log("Redirected to home page");
+                    });
+                } 
             });
     }
 
-
     render() {
-        const {onRouteChange} = this.props;
         return (
             <div className="flex justify-center items-center vh-100">
                 <article className="br2 ba dark-gray b--white-50 mv4 w-100 w-50-m w-25-l mw5">
@@ -57,7 +57,7 @@ class Register extends React.Component {
                                 className="pa2 white input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                                 type="text" 
                                 name="name"  
-                                id="email-address"
+                                id="name"
                                 onChange={this.onNameChange}/>
                             </div>
                             <div className="mt3">
@@ -80,7 +80,7 @@ class Register extends React.Component {
                             </div>
                             </fieldset>
                             <div className="">
-                            <input onClick={this.onSubmitSignIn} className="b ph3 pv2 input-reset ba b--white bg-transparent dim pointer f6 dib white" type="submit" value="Register"/>
+                            <input onClick={this.onSubmitRegister} className="b ph3 pv2 input-reset ba b--white bg-transparent dim pointer f6 dib white" type="submit" value="Register"/>
                             </div>
                         </form>
                     </main>
