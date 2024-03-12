@@ -96,6 +96,7 @@ class App extends Component {
       this.setState({imageUrl: this.state.input});
   
       fetch("https://api.clarifai.com/v2/models/" + 'face-detection' + "/outputs", setUpApi(this.state.input))
+        .then(response => response.json())
         .then(response => {
           if (response) {
             fetch('http://localhost:3000/image', {
@@ -107,12 +108,10 @@ class App extends Component {
             })
             .then(response => response.json())
             .then(count => {
-              this.setState(Object.assign(this.state.user, { entries: count}));
-              // Moved the following line inside the 'then' block to ensure it executes after the previous asynchronous operations
-              this.displayFaceBox(this.calculateFaceLocation(response));
+              this.setState(Object.assign(this.state.user, {entries: count}))
             })
-            .catch(error => console.log('error', error));
           }
+          this.displayFaceBox(this.calculateFaceLocation(response))
         })
         .catch(error => console.log('error', error));
   }
