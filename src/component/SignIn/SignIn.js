@@ -79,3 +79,60 @@ class SignIn extends React.Component {
 }
 
 export default SignIn;
+
+ /* onSubmit = () => {
+    const { input, user } = this.state;
+     const requestOptions = setupClarifai(input); */
+
+   /*  fetch("https://api.clarifai.com/v2/models/face-detection/outputs", requestOptions)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Error with Clarifai request");
+      }
+      return response.json(); // Parse the response as JSON
+    })
+    .then(data => {
+      this.setState({ imageUrl: input });
+
+      const regions = data.outputs[0]?.data?.regions || []; // Safely access regions array
+
+      // Update the user's entry count on the backend
+      return fetch('http://localhost:3000/image', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: user.id }), // Pass the user ID to update
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Failed to update user entry count");
+          }
+          return response.json(); // Parse the updated count from the response
+        })
+        .then(count => {
+          // Update the user's entry count in the local state
+          this.setState(prevState => ({
+            user: { ...prevState.user, entries: count },
+          }));
+
+          return regions; // Return regions to be processed further
+        });
+    })
+    .then(regions => {
+      // Process the regions and log relevant information
+      regions.forEach(region => {
+        const boundingBox = region.region_info.bounding_box;
+        const topRow = (boundingBox.top_row * 100).toFixed(2);
+        const leftCol = (boundingBox.left_col * 100).toFixed(2);
+        const bottomRow = (boundingBox.bottom_row * 100).toFixed(2);
+        const rightCol = (boundingBox.right_col * 100).toFixed(2);
+
+        console.log(
+          `Face detected with bounding box: top: ${topRow}%, left: ${leftCol}%, bottom: ${bottomRow}%, right: ${rightCol}%`
+        );
+        this.displayFaceBox(this.calculateFaceLocation(region))
+      });
+    })
+    .catch(error => {
+      console.error("An error occurred during processing:", error);
+    });
+}; */
