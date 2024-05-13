@@ -63,7 +63,7 @@ class App extends Component {
 
     onSubmit = () => {
       this.setState({imageUrl: this.state.input});
-      fetch('https://face-detection-backend-jl6b.onrender.com/imageurl', {
+      fetch('https://face-detection-backend-steel.vercel.app/imageurl', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -73,7 +73,7 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
         if (response) {
-          fetch('https://face-detection-backend-jl6b.onrender.com/image', {
+          fetch('https://face-detection-backend-steel.vercel.app/image', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
